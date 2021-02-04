@@ -32,6 +32,7 @@ export default function App() {
 
   return (
     <div className="App">
+      Enter a sentence:{" "}
       <input type="text" onChange={({ target }) => setFirst(target.value)} />
       <p>{first}</p>
       <p>{second}</p>
