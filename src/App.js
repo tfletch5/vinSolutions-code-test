@@ -13,21 +13,26 @@ export default function App() {
   const [second, setSecond] = useState("");
 
   useEffect(() => {
-    let newSentence = "";
-    first.split(" ").forEach((f) => {
-      const count = String.prototype.concat(...new Set(f.slice(1, -1))).length;
-      newSentence += f.substr(0, 1) + count + f.substr(-1, 1) + " ";
-    });
-    setSecond(newSentence);
+    if (first) {
+      let newSentence = "";
+      const nonAlphabetic = first.match(/[^A-Za-z]/g);
+      const alphabetic = first.split(/[^A-Za-z]/g);
+
+      alphabetic.forEach((f, i) => {
+        const space =
+          nonAlphabetic && nonAlphabetic[i] ? nonAlphabetic[i] : " ";
+        const count =
+          String.prototype.concat(...new Set(f.slice(1, -1))).length || "";
+
+        newSentence += f.substr(0, 1) + count + f.substr(-1, 1) + space;
+      });
+      setSecond(newSentence);
+    }
   }, [first]);
 
   return (
     <div className="App">
-      <input
-        type="text"
-        id="sentence"
-        onChange={({ target }) => setFirst(target.value)}
-      />
+      <input type="text" onChange={({ target }) => setFirst(target.value)} />
       <p>{first}</p>
       <p>{second}</p>
     </div>
