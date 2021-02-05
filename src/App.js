@@ -21,8 +21,8 @@ export default function App() {
       alphabetic.forEach((f, i) => {
         const space =
           nonAlphabetic && nonAlphabetic[i] ? nonAlphabetic[i] : " ";
-        const count =
-          String.prototype.concat(...new Set(f.slice(1, -1))).length || "";
+        const count = String.prototype.concat(...new Set(f.slice(1, -1)))
+          .length;
 
         newSentence += f.substr(0, 1) + count + f.substr(-1, 1) + space;
       });
